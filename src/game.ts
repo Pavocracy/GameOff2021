@@ -47,7 +47,7 @@ class Game extends Phaser.Scene
 
     create ()
     {
-        this.player = this.add.image(400, 300, 'player');
+        this.player = this.add.image(game.canvas.width * 0.5, game.canvas.height * 0.75, 'player');
     }
 
     update ()
@@ -66,8 +66,8 @@ class Game extends Phaser.Scene
 const config = {
     type: Phaser.AUTO,
     backgroundColor: '#808080',
-    width: 800,
-    height: 600,
+    width: window.innerWidth - (window.innerWidth * 0.03),
+    height: window.innerHeight - (window.innerHeight * 0.03),
     scene: [Title, Game]
 };
 
