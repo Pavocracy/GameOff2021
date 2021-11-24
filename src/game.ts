@@ -1,5 +1,4 @@
 import 'phaser'
-import { GameObjects } from 'phaser';
 
 class Title extends Phaser.Scene
 {
@@ -115,7 +114,7 @@ class Game extends Phaser.Scene
 
 const config = {
     type: Phaser.AUTO,
-    backgroundColor: '#808080',
+    backgroundColor: '#f700ff',
     width: window.innerWidth - (window.innerWidth * 0.03),
     height: window.innerHeight - (window.innerHeight * 0.03),
     scene: [Title, Game]
