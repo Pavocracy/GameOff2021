@@ -11,7 +11,7 @@ jobs:
     - name: upload files
       uses: SamKirkland/FTP-Deploy-Action@4.2.0
       with:
-        server: ftp.adampavey.com
+        server: adampavey.com
         username: ${{ secrets.ftp_username }}
         password: ${{ secrets.ftp_password }}
         local-dir: ./dist/
