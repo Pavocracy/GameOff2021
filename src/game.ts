@@ -107,13 +107,13 @@ class Game extends Phaser.Scene
                 randomIndex = Math.floor(this.roads.length / 2);
             };
 
-            this.cars.push(this.add.image(this.roads[randomIndex].x, Math.floor((Math.random() * -this.gameHeight)), 'car').setScale(this.carScale, this.carScale).setOrigin(0.5, 0));
+            this.cars.push(this.physics.add.image(this.roads[randomIndex].x, Math.floor((Math.random() * -this.gameHeight)), 'car').setScale(this.carScale, this.carScale).setOrigin(0.5, 0));
         };
 
         this.playerWidth = this.textures.get("player").getSourceImage().width;
         this.playerHeight = this.textures.get("player").getSourceImage().height;
         this.playerScale = (this.roadWidth / 2) / this.playerWidth;
-        this.player = this.add.image(this.gameWidth * 0.5, this.gameHeight - ((this.playerHeight * this.playerScale) / 2), 'player').setScale(this.playerScale, this.playerScale);
+        this.player = this.physics.add.image(this.gameWidth * 0.5, this.gameHeight - ((this.playerHeight * this.playerScale) / 2), 'player').setScale(this.playerScale, this.playerScale);
     };
 
     update ()
@@ -128,7 +128,7 @@ class Game extends Phaser.Scene
         };
 
         for(let i = 0; i < this.cars.length; i++){
-            if(this.cars[i].y > this.gameHeight){
+            if(this.cars[i].y > this.gameHeight || this.physics.overlap(this.cars[i], this.player)){
                 this.cars[i].y = Math.floor((Math.random() * -this.gameHeight)) - (this.carHeight * this.carScale / 2);
                 var randomIndex = Math.floor(Math.random() * this.roads.length);
                 if(this.roads[randomIndex].texture.key == "road-side"){
@@ -159,6 +159,9 @@ const config = {
     backgroundColor: '#f700ff',
     width: window.innerWidth - (window.innerWidth * 0.03),
     height: window.innerHeight - (window.innerHeight * 0.03),
+    physics: {
+        default: 'arcade'
+    },
     scene: [Title, Game]
 };
 
