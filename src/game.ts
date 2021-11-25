@@ -107,7 +107,7 @@ class Game extends Phaser.Scene
                 randomIndex = Math.floor(this.roads.length / 2);
             };
 
-            this.cars.push(this.physics.add.image(this.roads[randomIndex].x, Math.floor((Math.random() * -this.gameHeight)), 'car').setScale(this.carScale, this.carScale).setOrigin(0.5, 0));
+            this.cars.push(this.physics.add.image(this.roads[randomIndex].x, -Math.floor((Math.random() * this.gameHeight) + (this.carHeight * this.carScale)), 'car').setScale(this.carScale, this.carScale).setOrigin(0.5, 0));
         };
 
         this.playerWidth = this.textures.get("player").getSourceImage().width;
@@ -128,8 +128,8 @@ class Game extends Phaser.Scene
         };
 
         for(let i = 0; i < this.cars.length; i++){
-            if(this.cars[i].y > this.gameHeight || this.physics.overlap(this.cars[i], this.player)){
-                this.cars[i].y = Math.floor((Math.random() * -this.gameHeight)) - (this.carHeight * this.carScale / 2);
+            if(this.cars[i].y > this.gameHeight || this.physics.overlap(this.cars[i], this.player) || this.physics.overlap(this.cars[i], this.cars)){
+                this.cars[i].y = -Math.floor((Math.random() * this.gameHeight) + (this.carHeight * this.carScale));
                 var randomIndex = Math.floor(Math.random() * this.roads.length);
                 if(this.roads[randomIndex].texture.key == "road-side"){
                     this.cars[i].x = this.roads[Math.floor(this.roads.length / 2)].x;
